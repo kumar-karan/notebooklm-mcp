@@ -21,20 +21,15 @@
     "ai",
     "claude"
   ],
-  "author": "Gérôme Dexheimer <hello@geromedexheimer.de> (https://github.com/PleasePrompto)",
+  "author": "",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PleasePrompto/aistudio-mcp.git"
-  },
-  "homepage": "https://github.com/PleasePrompto/aistudio-mcp#readme",
-  "bugs": {
-    "url": "https://github.com/PleasePrompto/aistudio-mcp/issues"
+    "url": ""
   },
   "files": [
     "dist",
     "README.md",
-    "AISTUDIO_USAGE.md",
     "LICENSE",
     "docs"
   ],

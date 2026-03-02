@@ -1,7 +1,7 @@
 /**
  * Browser Session
  *
- * Represents a single browser session for NotebookLM interactions.
+ * Represents a single browser session for AI Studio interactions.
  *
  * Features:
  * - Human-like question typing
@@ -126,9 +126,9 @@ export class BrowserSession {
         log.info(`  ℹ️  No saved sessionStorage found (fresh session)`);
       }
 
-      // Wait for NotebookLM interface to load
-      log.info(`  ⏳ Waiting for NotebookLM interface...`);
-      await this.waitForNotebookLMReady();
+      // Wait for AI Studio interface to load
+      log.info(`  ⏳ Waiting for AI Studio interface...`);
+      await this.waitForAIStudioReady();
 
       this.initialized = true;
       this.updateActivity();
@@ -144,16 +144,16 @@ export class BrowserSession {
   }
 
   /**
-   * Wait for NotebookLM interface to be ready
+   * Wait for AI Studio interface to be ready
    *
    * IMPORTANT: Matches Python implementation EXACTLY!
    * - Uses SPECIFIC selectors (textarea.query-box-input)
    * - Checks ONLY for "visible" state (NOT disabled!)
-   * - NO placeholder checks (let NotebookLM handle that!)
+   * - NO placeholder checks (let AI Studio handle that!)
    *
    * Based on Python _wait_for_ready() from browser_session.py:104-113
    */
-  private async waitForNotebookLMReady(): Promise<void> {
+  private async waitForAIStudioReady(): Promise<void> {
     if (!this.page) {
       throw new Error("Page not initialized");
     }
@@ -176,9 +176,9 @@ export class BrowserSession {
         });
         log.success("  ✅ Chat input ready (fallback)!");
       } catch (error) {
-        log.error(`  ❌ NotebookLM interface not ready: ${error}`);
+        log.error(`  ❌ AI Studio interface not ready: ${error}`);
         throw new Error(
-          "Could not find NotebookLM chat input. " +
+          "Could not find AI Studio chat input. " +
           "Please ensure the notebook page has loaded correctly."
         );
       }
@@ -332,7 +332,7 @@ export class BrowserSession {
       return;
     }
 
-    log.info(`  ⏳ Waiting for NotebookLM origin before restoring sessionStorage...`);
+    log.info(`  ⏳ Waiting for AI Studio origin before restoring sessionStorage...`);
 
     const handleNavigation = async () => {
       if (restored) {
@@ -348,7 +348,7 @@ export class BrowserSession {
   }
 
   /**
-   * Ask a question to NotebookLM
+   * Ask a question to AI Studio
    */
   async ask(question: string, sendProgress?: ProgressCallback, options?: any): Promise<string> {
     const askOnce = async (): Promise<string> => {
@@ -405,7 +405,7 @@ export class BrowserSession {
 
       // Wait for the response with streaming detection
       log.info(`  ⏳ Waiting for response (with streaming detection)...`);
-      await sendProgress?.("Waiting for NotebookLM response (streaming detection active)...", 3, 5);
+      await sendProgress?.("Waiting for AI Studio response (streaming detection active)...", 3, 5);
       const answer = await waitForLatestAnswer(page, {
         question,
         timeoutMs: 120000, // 2 minutes
@@ -415,14 +415,14 @@ export class BrowserSession {
       });
 
       if (!answer) {
-        throw new Error("Timeout waiting for response from NotebookLM");
+        throw new Error("Timeout waiting for response from AI Studio");
       }
 
       // Check for rate limit errors AFTER receiving answer
       log.info(`  🔍 Checking for rate limit errors...`);
       if (await this.detectRateLimitError()) {
         throw new RateLimitError(
-          "NotebookLM rate limit reached (50 queries/day for free accounts)"
+          "AI Studio rate limit reached (50 queries/day for free accounts)"
         );
       }
 
@@ -503,7 +503,7 @@ export class BrowserSession {
    * Detect if a rate limit error occurred
    *
    * Searches the page for error messages indicating rate limit/quota exhaustion.
-   * Free NotebookLM accounts have 50 queries/day limit.
+   * Free AI Studio accounts have 50 queries/day limit.
    *
    * @returns true if rate limit error detected, false otherwise
    */
@@ -560,7 +560,7 @@ export class BrowserSession {
       }
     }
 
-    // Also check if chat input is disabled (sometimes NotebookLM disables input when rate limited)
+    // Also check if chat input is disabled (sometimes AI Studio disables input when rate limited)
     try {
       const inputSelector = "textarea.query-box-input";
       const input = await this.page.$(inputSelector);
@@ -608,7 +608,7 @@ export class BrowserSession {
       await randomDelay(2000, 3000);
 
       // Wait for interface to be ready again
-      await this.waitForNotebookLMReady();
+      await this.waitForAIStudioReady();
 
       // Reset message count
       this.messageCount = 0;
