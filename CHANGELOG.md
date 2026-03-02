@@ -10,14 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **Tool Profiles System** - Reduce token usage by loading only the tools you need
   - Three profiles: `minimal` (5 tools), `standard` (10 tools), `full` (16 tools)
-  - Persistent configuration via `~/.config/notebooklm-mcp/settings.json`
-  - Environment variable overrides: `NOTEBOOKLM_PROFILE`, `NOTEBOOKLM_DISABLED_TOOLS`
+  - Persistent configuration via `~/.config/aistudio-mcp/settings.json`
+  - Environment variable overrides: `AISTUDIO_PROFILE`, `AISTUDIO_DISABLED_TOOLS`
 
 - **CLI Configuration Commands** - Easy profile management without editing files
-  - `npx notebooklm-mcp config get` - Show current configuration
-  - `npx notebooklm-mcp config set profile <name>` - Set profile (minimal/standard/full)
-  - `npx notebooklm-mcp config set disabled-tools <list>` - Disable specific tools
-  - `npx notebooklm-mcp config reset` - Reset to defaults
+  - `npx aistudio-mcp config get` - Show current configuration
+  - `npx aistudio-mcp config set profile <name>` - Set profile (minimal/standard/full)
+  - `npx aistudio-mcp config set disabled-tools <list>` - Disable specific tools
+  - `npx aistudio-mcp config reset` - Reset to defaults
 
 ### Changed
 - **Modularized Codebase** - Improved maintainability and code organization
@@ -34,13 +34,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Now waits for `div.thinking-message` element to disappear before reading answer
   - Removed unreliable text-based placeholder detection (`PLACEHOLDER_SNIPPETS`)
   - Answers like "Reviewing the content..." or "Looking for answers..." no longer returned prematurely
-  - Works reliably across all languages and NotebookLM UI changes
+  - Works reliably across all languages and AI Studio UI changes
 
 ## [1.1.2] - 2025-10-19
 
 ### Changed
 - **README Documentation** - Added Claude Code Skill reference
-  - New badge linking to [notebooklm-skill](https://github.com/PleasePrompto/notebooklm-skill) repository
+  - New badge linking to [aistudio-skill](https://github.com/PleasePrompto/aistudio-skill) repository
   - Added prominent callout section explaining Claude Code Skill availability
   - Clarified differences between MCP server and Skill implementations
   - Added navigation link to Skill repository in top menu
@@ -64,8 +64,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] - 2025-10-18
 
 ### Added
-- **Deep Cleanup Tool** - Comprehensive system cleanup for fresh NotebookLM MCP installations
-  - Scans entire system for ALL NotebookLM files (installation data, caches, logs, temp files)
+- **Deep Cleanup Tool** - Comprehensive system cleanup for fresh AI Studio MCP installations
+  - Scans entire system for ALL AI Studio files (installation data, caches, logs, temp files)
   - Finds hidden files in NPM cache, Claude CLI logs, editor logs, system trash, temp backups
   - Shows categorized preview before deletion with exact file list and sizes
   - Safe by design: Always requires explicit confirmation after preview
@@ -81,10 +81,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Settings passed as tool parameters (`browser_options`) or environment variables
   - Claude can now control ALL browser settings via tool parameters
   - `saveUserConfig()` and `loadUserConfig()` functions removed
-- **Unified Data Paths** - Consolidated from `notebooklm-mcp-nodejs` to `notebooklm-mcp`
-  - Linux: `~/.local/share/notebooklm-mcp/` (was: `notebooklm-mcp-nodejs`)
-  - macOS: `~/Library/Application Support/notebooklm-mcp/`
-  - Windows: `%LOCALAPPDATA%\notebooklm-mcp\`
+- **Unified Data Paths** - Consolidated from `aistudio-mcp-nodejs` to `aistudio-mcp`
+  - Linux: `~/.local/share/aistudio-mcp/` (was: `aistudio-mcp-nodejs`)
+  - macOS: `~/Library/Application Support/aistudio-mcp/`
+  - Windows: `%LOCALAPPDATA%\aistudio-mcp\`
   - Old paths automatically detected by cleanup tool
 - **Advanced Browser Options** - New `browser_options` parameter for browser-based tools
   - Control visibility, typing speed, stealth mode, timeouts, viewport size
@@ -96,8 +96,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Default Viewport Size** - Changed from 1920x1080 to 1024x768
   - More reasonable default for most use cases
   - Can be overridden via `browser_options.viewport` parameter
-- Config directory (`~/.config/notebooklm-mcp/`) no longer created (not needed)
-- Improved logging for sessionStorage (NotebookLM does not use sessionStorage)
+- Config directory (`~/.config/aistudio-mcp/`) no longer created (not needed)
+- Improved logging for sessionStorage (AI Studio does not use sessionStorage)
 - README.md updated to reflect config-less architecture
 
 ### Fixed
@@ -105,7 +105,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - All paths were incorrectly created with `-nodejs` suffix
   - Fix: Explicitly pass `{suffix: ""}` to disable default behavior
   - Affects: `config.ts` and `cleanup-manager.ts`
-  - Result: Correct paths now used (`notebooklm-mcp` instead of `notebooklm-mcp-nodejs`)
+  - Result: Correct paths now used (`aistudio-mcp` instead of `aistudio-mcp-nodejs`)
 - Enhanced cleanup tool to detect all legacy paths including manual installations
   - Added `getManualLegacyPaths()` method for comprehensive legacy file detection
   - Finds old config.json files across all platforms
@@ -131,7 +131,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Existing session is automatically closed and recreated with same session ID
     - Browser context is recreated with new visibility mode
     - Chat history is reset (message_count returns to 0)
-    - This is necessary because NotebookLM chat state is not persistent across browser restarts
+    - This is necessary because AI Studio chat state is not persistent across browser restarts
   - **Files changed**: `src/tools/index.ts`, `src/session/shared-context-manager.ts`
 
 ### Removed
@@ -174,12 +174,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Initial release
-- NotebookLM integration via Model Context Protocol (MCP)
+- AI Studio integration via Model Context Protocol (MCP)
 - Session-based conversations with Gemini 2.5
 - Source-grounded answers from notebook documents
 - Notebook library management system
 - Google authentication with persistent browser sessions
-- 16 MCP tools for comprehensive NotebookLM interaction
+- 16 MCP tools for comprehensive AI Studio interaction
 - Support for Claude Code, Codex, Cursor, and other MCP clients
 - TypeScript implementation with full type safety
 - Playwright browser automation with stealth mode

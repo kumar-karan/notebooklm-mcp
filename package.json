@@ -1,10 +1,10 @@
 {
-  "name": "notebooklm-mcp",
+  "name": "aistudio-mcp",
   "version": "1.2.1",
-  "description": "MCP server for NotebookLM API with session support and human-like behavior",
+  "description": "MCP server for AI Studio API with session support and human-like behavior",
   "type": "module",
   "bin": {
-    "notebooklm-mcp": "dist/index.js"
+    "aistudio-mcp": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -16,7 +16,7 @@
   },
   "keywords": [
     "mcp",
-    "notebooklm",
+    "aistudio",
     "gemini",
     "ai",
     "claude"
@@ -25,16 +25,16 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PleasePrompto/notebooklm-mcp.git"
+    "url": "git+https://github.com/PleasePrompto/aistudio-mcp.git"
   },
-  "homepage": "https://github.com/PleasePrompto/notebooklm-mcp#readme",
+  "homepage": "https://github.com/PleasePrompto/aistudio-mcp#readme",
   "bugs": {
-    "url": "https://github.com/PleasePrompto/notebooklm-mcp/issues"
+    "url": "https://github.com/PleasePrompto/aistudio-mcp/issues"
   },
   "files": [
     "dist",
     "README.md",
-    "NOTEBOOKLM_USAGE.md",
+    "AISTUDIO_USAGE.md",
     "LICENSE",
     "docs"
   ],

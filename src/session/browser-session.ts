@@ -28,7 +28,7 @@ import { RateLimitError } from "../errors.js";
 
 export class BrowserSession {
   public readonly sessionId: string;
-  public readonly notebookUrl: string;
+  public readonly chatUrl: string;
   public readonly createdAt: number;
   public lastActivity: number;
   public messageCount: number;
@@ -43,12 +43,12 @@ export class BrowserSession {
     sessionId: string,
     sharedContextManager: SharedContextManager,
     authManager: AuthManager,
-    notebookUrl: string
+    chatUrl: string
   ) {
     this.sessionId = sessionId;
     this.sharedContextManager = sharedContextManager;
     this.authManager = authManager;
-    this.notebookUrl = notebookUrl;
+    this.chatUrl = chatUrl;
     this.createdAt = Date.now();
     this.lastActivity = Date.now();
     this.messageCount = 0;
@@ -87,8 +87,8 @@ export class BrowserSession {
       log.success(`  ✅ Created new page`);
 
       // Navigate to notebook
-      log.info(`  🌐 Navigating to: ${this.notebookUrl}`);
-      await this.page.goto(this.notebookUrl, {
+      log.info(`  🌐 Navigating to: ${this.chatUrl}`);
+      await this.page.goto(this.chatUrl, {
         waitUntil: "domcontentloaded",
         timeout: CONFIG.browserTimeout,
       });
@@ -258,7 +258,7 @@ export class BrowserSession {
       if (loginSuccess) {
         log.success(`  ✅ Auto-login successful`);
         // Navigate back to notebook
-        await this.page.goto(this.notebookUrl, {
+        await this.page.goto(this.chatUrl, {
           waitUntil: "domcontentloaded",
         });
         await randomDelay(2000, 3000);
@@ -295,7 +295,7 @@ export class BrowserSession {
       return;
     }
 
-    const targetOrigin = this.getOriginFromUrl(this.notebookUrl);
+    const targetOrigin = this.getOriginFromUrl(this.chatUrl);
     if (!targetOrigin) {
       log.warning(`  ⚠️  Unable to determine target origin for sessionStorage restore`);
       return;
@@ -316,7 +316,6 @@ export class BrowserSession {
       try {
         await this.page.evaluate((data) => {
           for (const [key, value] of Object.entries(data)) {
-            // @ts-expect-error - sessionStorage exists in browser context
             sessionStorage.setItem(key, value);
           }
         }, sessionData);
@@ -351,7 +350,7 @@ export class BrowserSession {
   /**
    * Ask a question to NotebookLM
    */
-  async ask(question: string, sendProgress?: ProgressCallback): Promise<string> {
+  async ask(question: string, sendProgress?: ProgressCallback, options?: any): Promise<string> {
     const askOnce = async (): Promise<string> => {
       if (!this.initialized || !this.page || this.isPageClosedSafe()) {
         log.warning(`  ℹ️  Session not initialized or page missing → re-initializing...`);
@@ -683,7 +682,7 @@ export class BrowserSession {
       age_seconds: (now - this.createdAt) / 1000,
       inactive_seconds: (now - this.lastActivity) / 1000,
       message_count: this.messageCount,
-      notebook_url: this.notebookUrl,
+      chat_url: this.chatUrl,
     };
   }
 
