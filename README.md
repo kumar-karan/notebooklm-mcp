@@ -1,16 +1,16 @@
 <div align="center">
 
-# NotebookLM MCP Server
+# AI Studio MCP Server
 
-**Let your CLI agents (Claude, Cursor, Codex...) chat directly with NotebookLM for zero-hallucination answers based on your own notebooks**
+**Let your CLI agents (Claude, Cursor, Codex...) chat directly with AI Studio for zero-hallucination answers based on your own notebooks**
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
 [![MCP](https://img.shields.io/badge/MCP-2025-green.svg)](https://modelcontextprotocol.io/)
-[![npm](https://img.shields.io/npm/v/notebooklm-mcp.svg)](https://www.npmjs.com/package/notebooklm-mcp)
-[![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-purple.svg)](https://github.com/PleasePrompto/notebooklm-skill)
-[![GitHub](https://img.shields.io/github/stars/PleasePrompto/notebooklm-mcp?style=social)](https://github.com/PleasePrompto/notebooklm-mcp)
+[![npm](https://img.shields.io/npm/v/aistudio-mcp.svg)](https://www.npmjs.com/package/aistudio-mcp)
+[![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-purple.svg)](https://github.com/PleasePrompto/aistudio-skill)
+[![GitHub](https://img.shields.io/github/stars/PleasePrompto/aistudio-mcp?style=social)](https://github.com/PleasePrompto/aistudio-mcp)
 
-[Installation](#installation) • [Quick Start](#quick-start) • [Why NotebookLM](#why-notebooklm-not-local-rag) • [Examples](#real-world-example) • [Claude Code Skill](https://github.com/PleasePrompto/notebooklm-skill) • [Documentation](./docs/)
+[Installation](#installation) • [Quick Start](#quick-start) • [Why AI Studio](#why-aistudio-not-local-rag) • [Examples](#real-world-example) • [Claude Code Skill](https://github.com/PleasePrompto/aistudio-skill) • [Documentation](./docs/)
 
 </div>
 
@@ -26,26 +26,26 @@ When you tell Claude Code or Cursor to "search through my local documentation", 
 
 ## The Solution
 
-Let your local agents chat directly with [**NotebookLM**](https://notebooklm.google/) — Google's **zero-hallucination knowledge base** powered by Gemini 2.5 that provides intelligent, synthesized answers from your docs.
+Let your local agents chat directly with [**AI Studio**](https://aistudio.google/) — Google's **zero-hallucination knowledge base** powered by Gemini 2.5 that provides intelligent, synthesized answers from your docs.
 
 ```
-Your Task → Local Agent asks NotebookLM → Gemini synthesizes answer → Agent writes correct code
+Your Task → Local Agent asks AI Studio → Gemini synthesizes answer → Agent writes correct code
 ```
 
-**The real advantage**: No more manual copy-paste between NotebookLM and your editor. Your agent asks NotebookLM directly and gets answers straight back in the CLI. It builds deep understanding through automatic follow-ups — Claude asks multiple questions in sequence, each building on the last, getting specific implementation details, edge cases, and best practices. You can save NotebookLM links to your local library with tags and descriptions, and Claude automatically selects the relevant notebook based on your current task.
+**The real advantage**: No more manual copy-paste between AI Studio and your editor. Your agent asks AI Studio directly and gets answers straight back in the CLI. It builds deep understanding through automatic follow-ups — Claude asks multiple questions in sequence, each building on the last, getting specific implementation details, edge cases, and best practices. You can save AI Studio links to your local library with tags and descriptions, and Claude automatically selects the relevant notebook based on your current task.
 
 ---
 
-## Why NotebookLM, Not Local RAG?
+## Why AI Studio, Not Local RAG?
 
 | Approach | Token Cost | Setup Time | Hallucinations | Answer Quality |
 |----------|------------|------------|----------------|----------------|
 | **Feed docs to Claude** | 🔴 Very high (multiple file reads) | Instant | Yes - fills gaps | Variable retrieval |
 | **Web search** | 🟡 Medium | Instant | High - unreliable sources | Hit or miss |
 | **Local RAG** | 🟡 Medium-High | Hours (embeddings, chunking) | Medium - retrieval gaps | Depends on setup |
-| **NotebookLM MCP** | 🟢 Minimal | 5 minutes | **Zero** - refuses if unknown | Expert synthesis |
+| **AI Studio MCP** | 🟢 Minimal | 5 minutes | **Zero** - refuses if unknown | Expert synthesis |
 
-### What Makes NotebookLM Superior?
+### What Makes AI Studio Superior?
 
 1. **Pre-processed by Gemini**: Upload docs once, get instant expert knowledge
 2. **Natural language Q&A**: Not just retrieval — actual understanding and synthesis
@@ -59,19 +59,19 @@ Your Task → Local Agent asks NotebookLM → Gemini synthesizes answer → Agen
 
 ### Claude Code
 ```bash
-claude mcp add notebooklm npx notebooklm-mcp@latest
+claude mcp add aistudio npx aistudio-mcp@latest
 ```
 
 ### Codex
 ```bash
-codex mcp add notebooklm -- npx notebooklm-mcp@latest
+codex mcp add aistudio -- npx aistudio-mcp@latest
 ```
 
 <details>
 <summary>Gemini</summary>
 
 ```bash
-gemini mcp add notebooklm npx notebooklm-mcp@latest
+gemini mcp add aistudio npx aistudio-mcp@latest
 ```
 </details>
 
@@ -82,9 +82,9 @@ Add to `~/.cursor/mcp.json`:
 ```json
 {
   "mcpServers": {
-    "notebooklm": {
+    "aistudio": {
       "command": "npx",
-      "args": ["-y", "notebooklm-mcp@latest"]
+      "args": ["-y", "aistudio-mcp@latest"]
     }
   }
 }
@@ -95,7 +95,7 @@ Add to `~/.cursor/mcp.json`:
 <summary>amp</summary>
 
 ```bash
-amp mcp add notebooklm -- npx notebooklm-mcp@latest
+amp mcp add aistudio -- npx aistudio-mcp@latest
 ```
 </details>
 
@@ -103,7 +103,7 @@ amp mcp add notebooklm -- npx notebooklm-mcp@latest
 <summary>VS Code</summary>
 
 ```bash
-code --add-mcp '{"name":"notebooklm","command":"npx","args":["notebooklm-mcp@latest"]}'
+code --add-mcp '{"name":"aistudio","command":"npx","args":["aistudio-mcp@latest"]}'
 ```
 </details>
 
@@ -114,9 +114,9 @@ code --add-mcp '{"name":"notebooklm","command":"npx","args":["notebooklm-mcp@lat
 ```json
 {
   "mcpServers": {
-    "notebooklm": {
+    "aistudio": {
       "command": "npx",
-      "args": ["notebooklm-mcp@latest"]
+      "args": ["aistudio-mcp@latest"]
     }
   }
 }
@@ -129,13 +129,13 @@ code --add-mcp '{"name":"notebooklm","command":"npx","args":["notebooklm-mcp@lat
 
 **Prefer Claude Code Skills over MCP?** This server is now also available as a native Claude Code Skill with a simpler setup:
 
-**[NotebookLM Claude Code Skill](https://github.com/PleasePrompto/notebooklm-skill)** - Clone to `~/.claude/skills` and start using immediately
+**[AI Studio Claude Code Skill](https://github.com/PleasePrompto/aistudio-skill)** - Clone to `~/.claude/skills` and start using immediately
 
 **Key differences:**
 - **MCP Server** (this repo): Persistent sessions, works with Claude Code, Codex, Cursor, and other MCP clients
 - **Claude Code Skill**: Simpler setup, Python-based, stateless queries, works only with local Claude Code
 
-Both use the same browser automation technology and provide zero-hallucination answers from your NotebookLM notebooks.
+Both use the same browser automation technology and provide zero-hallucination answers from your AI Studio notebooks.
 
 ---
 
@@ -147,12 +147,12 @@ Both use the same browser automation technology and provide zero-hallucination a
 
 Say in your chat (Claude/Codex):
 ```
-"Log me in to NotebookLM"
+"Log me in to AI Studio"
 ```
 *A Chrome window opens → log in with Google*
 
 ### 3. Create your knowledge base
-Go to [notebooklm.google.com](https://notebooklm.google.com) → Create notebook → Upload your docs:
+Go to [aistudio.google.com](https://aistudio.google.com) → Create notebook → Upload your docs:
 - 📄 PDFs, Google Docs, markdown files
 - 🔗 Websites, GitHub repos
 - 🎥 YouTube videos
@@ -162,10 +162,10 @@ Share: **⚙️ Share → Anyone with link → Copy**
 
 ### 4. Let Claude use it
 ```
-"I'm building with [library]. Here's my NotebookLM: [link]"
+"I'm building with [library]. Here's my AI Studio: [link]"
 ```
 
-**That's it.** Claude now asks NotebookLM whatever it needs, building expertise before writing code.
+**That's it.** Claude now asks AI Studio whatever it needs, building expertise before writing code.
 
 ---
 
@@ -177,23 +177,23 @@ Share: **⚙️ Share → Anyone with link → Copy**
 
 **Solution**:
 1. Downloaded complete n8n documentation → merged into manageable chunks
-2. Uploaded to NotebookLM
-3. Told Claude: *"Build me a Gmail spam filter workflow. Use this NotebookLM: [link]"*
+2. Uploaded to AI Studio
+3. Told Claude: *"Build me a Gmail spam filter workflow. Use this AI Studio: [link]"*
 
 **Watch the AI-to-AI conversation:**
 
 ```
 Claude → "How does Gmail integration work in n8n?"
-NotebookLM → "Use Gmail Trigger with polling, or Gmail node with Get Many..."
+AI Studio → "Use Gmail Trigger with polling, or Gmail node with Get Many..."
 
 Claude → "How to decode base64 email body?"
-NotebookLM → "Body is base64url encoded in payload.parts, use Function node..."
+AI Studio → "Body is base64url encoded in payload.parts, use Function node..."
 
 Claude → "How to parse OpenAI response as JSON?"
-NotebookLM → "Set responseFormat to json, use {{ $json.spam }} in IF node..."
+AI Studio → "Set responseFormat to json, use {{ $json.spam }} in IF node..."
 
 Claude → "What about error handling if the API fails?"
-NotebookLM → "Use Error Trigger node with Continue On Fail enabled..."
+AI Studio → "Use Error Trigger node with Continue On Fail enabled..."
 
 Claude → ✅ "Here's your complete workflow JSON..."
 ```
@@ -205,13 +205,13 @@ Claude → ✅ "Here's your complete workflow JSON..."
 ## Core Features
 
 ### **Zero Hallucinations**
-NotebookLM refuses to answer if information isn't in your docs. No invented APIs.
+AI Studio refuses to answer if information isn't in your docs. No invented APIs.
 
 ### **Autonomous Research**
 Claude asks follow-up questions automatically, building complete understanding before coding.
 
 ### **Smart Library Management**
-Save NotebookLM links with tags and descriptions. Claude auto-selects the right notebook for your task.
+Save AI Studio links with tags and descriptions. Claude auto-selects the right notebook for your task.
 ```
 "Add [link] to library tagged 'frontend, react, components'"
 ```
@@ -225,7 +225,7 @@ Save NotebookLM links with tags and descriptions. Claude auto-selects the right 
 Set up once, use everywhere. Claude Code, Codex, Cursor — all share the same library.
 
 ### **Deep Cleanup Tool**
-Fresh start anytime. Scans entire system for NotebookLM data with categorized preview.
+Fresh start anytime. Scans entire system for AI Studio data with categorized preview.
 
 ---
 
@@ -245,31 +245,31 @@ Reduce token usage by loading only the tools you need. Each tool consumes contex
 
 ```bash
 # Check current settings
-npx notebooklm-mcp config get
+npx aistudio-mcp config get
 
 # Set a profile
-npx notebooklm-mcp config set profile minimal
-npx notebooklm-mcp config set profile standard
-npx notebooklm-mcp config set profile full
+npx aistudio-mcp config set profile minimal
+npx aistudio-mcp config set profile standard
+npx aistudio-mcp config set profile full
 
 # Disable specific tools (comma-separated)
-npx notebooklm-mcp config set disabled-tools "cleanup_data,re_auth"
+npx aistudio-mcp config set disabled-tools "cleanup_data,re_auth"
 
 # Reset to defaults
-npx notebooklm-mcp config reset
+npx aistudio-mcp config reset
 ```
 
 ### Configure via Environment Variables
 
 ```bash
 # Set profile
-export NOTEBOOKLM_PROFILE=minimal
+export AISTUDIO_PROFILE=minimal
 
 # Disable specific tools
-export NOTEBOOKLM_DISABLED_TOOLS="cleanup_data,re_auth,remove_notebook"
+export AISTUDIO_DISABLED_TOOLS="cleanup_data,re_auth,remove_notebook"
 ```
 
-Settings are saved to `~/.config/notebooklm-mcp/settings.json` and persist across sessions. Environment variables override file settings.
+Settings are saved to `~/.config/aistudio-mcp/settings.json` and persist across sessions. Environment variables override file settings.
 
 ---
 
@@ -280,7 +280,7 @@ graph LR
     A[Your Task] --> B[Claude/Codex]
     B --> C[MCP Server]
     C --> D[Chrome Automation]
-    D --> E[NotebookLM]
+    D --> E[AI Studio]
     E --> F[Gemini 2.5]
     F --> G[Your Docs]
     G --> F
@@ -297,19 +297,19 @@ graph LR
 
 | Intent | Say | Result |
 |--------|-----|--------|
-| Authenticate | *"Open NotebookLM auth setup"* or *"Log me in to NotebookLM"* | Chrome opens for login |
+| Authenticate | *"Open AI Studio auth setup"* or *"Log me in to AI Studio"* | Chrome opens for login |
 | Add notebook | *"Add [link] to library"* | Saves notebook with metadata |
 | List notebooks | *"Show our notebooks"* | Lists all saved notebooks |
-| Research first | *"Research this in NotebookLM before coding"* | Multi-question session |
+| Research first | *"Research this in AI Studio before coding"* | Multi-question session |
 | Select notebook | *"Use the React notebook"* | Sets active notebook |
 | Update notebook | *"Update notebook tags"* | Modify metadata |
 | Remove notebook | *"Remove [notebook] from library"* | Deletes from library |
-| View browser | *"Show me the browser"* | Watch live NotebookLM chat |
-| Fix auth | *"Repair NotebookLM authentication"* | Clears and re-authenticates |
+| View browser | *"Show me the browser"* | Watch live AI Studio chat |
+| Fix auth | *"Repair AI Studio authentication"* | Clears and re-authenticates |
 | Switch account | *"Re-authenticate with different Google account"* | Changes account |
-| Clean restart | *"Run NotebookLM cleanup"* | Removes all data for fresh start |
+| Clean restart | *"Run AI Studio cleanup"* | Removes all data for fresh start |
 | Keep library | *"Cleanup but keep my library"* | Preserves notebooks |
-| Delete all data | *"Delete all NotebookLM data"* | Complete removal |
+| Delete all data | *"Delete all AI Studio data"* | Complete removal |
 
 ---
 
@@ -318,24 +318,24 @@ graph LR
 ### vs. Downloading docs locally
 - **You**: Download docs → Claude: "search through these files"
 - **Problem**: Claude reads thousands of files → massive token usage, often misses connections
-- **NotebookLM**: Pre-indexed by Gemini, semantic understanding across all docs
+- **AI Studio**: Pre-indexed by Gemini, semantic understanding across all docs
 
 ### vs. Web search
 - **You**: "Research X online"
 - **Problem**: Outdated info, hallucinated examples, unreliable sources
-- **NotebookLM**: Only your trusted docs, always current, with citations
+- **AI Studio**: Only your trusted docs, always current, with citations
 
 ### vs. Local RAG setup
 - **You**: Set up embeddings, vector DB, chunking strategy, retrieval pipeline
 - **Problem**: Hours of setup, tuning retrieval, still gets "creative" with gaps
-- **NotebookLM**: Upload docs → done. Google handles everything.
+- **AI Studio**: Upload docs → done. Google handles everything.
 
 ---
 
 ## FAQ
 
 **Is it really zero hallucinations?**
-Yes. NotebookLM is specifically designed to only answer from uploaded sources. If it doesn't know, it says so.
+Yes. AI Studio is specifically designed to only answer from uploaded sources. If it doesn't know, it says so.
 
 **What about rate limits?**
 Free tier has daily query limits per Google account. Quick account switching supported for continued research.
@@ -344,7 +344,7 @@ Free tier has daily query limits per Google account. Quick account switching sup
 Chrome runs locally. Your credentials never leave your machine. Use a dedicated Google account if concerned.
 
 **Can I see what's happening?**
-Yes! Say *"Show me the browser"* to watch the live NotebookLM conversation.
+Yes! Say *"Show me the browser"* to watch the live AI Studio conversation.
 
 **What makes this better than Claude's built-in knowledge?**
 Your docs are always current. No training cutoff. No hallucinations. Perfect for new libraries, internal APIs, or fast-moving projects.
@@ -362,22 +362,22 @@ Your docs are always current. No training cutoff. No hallucinations. Perfect for
 
 ## The Bottom Line
 
-**Without NotebookLM MCP**: Write code → Find it's wrong → Debug hallucinated APIs → Repeat
+**Without AI Studio MCP**: Write code → Find it's wrong → Debug hallucinated APIs → Repeat
 
-**With NotebookLM MCP**: Claude researches first → Writes correct code → Ship faster
+**With AI Studio MCP**: Claude researches first → Writes correct code → Ship faster
 
 Stop debugging hallucinations. Start shipping accurate code.
 
 ```bash
 # Get started in 30 seconds
-claude mcp add notebooklm npx notebooklm-mcp@latest
+claude mcp add aistudio npx aistudio-mcp@latest
 ```
 
 ---
 
 ## Disclaimer
 
-This tool automates browser interactions with NotebookLM to make your workflow more efficient. However, a few friendly reminders:
+This tool automates browser interactions with AI Studio to make your workflow more efficient. However, a few friendly reminders:
 
 **About browser automation:**
 While I've built in humanization features (realistic typing speeds, natural delays, mouse movements) to make the automation behave more naturally, I can't guarantee Google won't detect or flag automated usage. I recommend using a dedicated Google account for automation rather than your primary account—think of it like web scraping: probably fine, but better safe than sorry!
@@ -389,7 +389,7 @@ CLI tools like Claude Code, Codex, and similar AI-powered assistants are incredi
 - Keep backups of important work
 - Remember: AI agents are assistants, not infallible oracles
 
-I built this tool for myself because I was tired of the copy-paste dance between NotebookLM and my editor. I'm sharing it in the hope it helps others too, but I can't take responsibility for any issues, data loss, or account problems that might occur. Use at your own discretion and judgment.
+I built this tool for myself because I was tired of the copy-paste dance between AI Studio and my editor. I'm sharing it in the hope it helps others too, but I can't take responsibility for any issues, data loss, or account problems that might occur. Use at your own discretion and judgment.
 
 That said, if you run into problems or have questions, feel free to open an issue on GitHub. I'm happy to help troubleshoot!
 
@@ -397,7 +397,7 @@ That said, if you run into problems or have questions, feel free to open an issu
 
 ## Contributing
 
-Found a bug? Have a feature idea? [Open an issue](https://github.com/PleasePrompto/notebooklm-mcp/issues) or submit a PR!
+Found a bug? Have a feature idea? [Open an issue](https://github.com/PleasePrompto/aistudio-mcp/issues) or submit a PR!
 
 ## License
 
@@ -407,8 +407,8 @@ MIT — Use freely in your projects.
 
 <div align="center">
 
-Built with frustration about hallucinated APIs, powered by Google's NotebookLM
+Built with frustration about hallucinated APIs, powered by Google's AI Studio
 
-⭐ [Star on GitHub](https://github.com/PleasePrompto/notebooklm-mcp) if this saves you debugging time!
+⭐ [Star on GitHub](https://github.com/PleasePrompto/aistudio-mcp) if this saves you debugging time!
 
 </div>

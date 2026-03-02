@@ -7,10 +7,10 @@ If you're experiencing persistent issues, corrupted data, or want to start compl
 
 **Recommended workflow:**
 1. Close all Chrome/Chromium windows and instances
-2. Ask: "Run NotebookLM cleanup and preserve my library"
+2. Ask: "Run AI Studio cleanup and preserve my library"
 3. Review the preview - you'll see exactly what will be deleted
 4. Confirm deletion
-5. Re-authenticate: "Open NotebookLM auth setup"
+5. Re-authenticate: "Open AI Studio auth setup"
 
 **What gets cleaned:**
 - Browser data, cache, Chrome profiles
@@ -38,8 +38,8 @@ If you're experiencing persistent issues, corrupted data, or want to start compl
 
 **For persistent auth failures:**
 1. Close ALL Chrome/Chromium instances
-2. Ask: "Run NotebookLM cleanup with library preservation"
-3. After cleanup completes, ask: "Open NotebookLM auth setup"
+2. Ask: "Run AI Studio cleanup with library preservation"
+3. After cleanup completes, ask: "Open AI Studio auth setup"
 4. This creates a completely fresh browser session while keeping your notebooks
 
 **Auto-login (optional):**
@@ -50,10 +50,10 @@ If you're experiencing persistent issues, corrupted data, or want to start compl
 - Adjust `TYPING_WPM_MIN`/`MAX`; or disable stealth typing by setting `STEALTH_ENABLED=false`.
 
 ### Rate limit reached
-- Symptom: "NotebookLM rate limit reached (50 queries/day for free accounts)".
+- Symptom: "AI Studio rate limit reached (50 queries/day for free accounts)".
 - Fix: Use `re_auth` tool to switch to a different Google account, or wait until tomorrow.
 - Upgrade: Google AI Pro/Ultra gives 5x higher limits.
 
 ### No notebooks found
-- Ask to add the NotebookLM link you need.
+- Ask to add the AI Studio link you need.
 - Ask to list the stored notebooks, then choose the one to activate.

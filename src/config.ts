@@ -1,5 +1,5 @@
 /**
- * Configuration for NotebookLM MCP Server
+ * Configuration for AI Studio MCP Server
  *
  * Config Priority (highest to lowest):
  * 1. Hardcoded Defaults (works out of the box!)
@@ -14,22 +14,22 @@ import fs from "fs";
 import path from "path";
 
 // Cross-platform data paths (unified without -nodejs suffix)
-// Linux: ~/.local/share/notebooklm-mcp/
-// macOS: ~/Library/Application Support/notebooklm-mcp/
-// Windows: %APPDATA%\notebooklm-mcp\
+// Linux: ~/.local/share/aistudio-mcp/
+// macOS: ~/Library/Application Support/aistudio-mcp/
+// Windows: %APPDATA%\aistudio-mcp\
 // IMPORTANT: Pass empty string suffix to disable envPaths' default '-nodejs' suffix!
-const paths = envPaths("notebooklm-mcp", {suffix: ""});
+const paths = envPaths("aistudio-mcp", {suffix: ""});
 
 /**
- * Google NotebookLM Auth URL (used by setup_auth)
- * This is the base Google login URL that redirects to NotebookLM
+ * Google AI Studio Auth URL (used by setup_auth)
+ * This is the base Google login URL that redirects to AI Studio
  */
-export const NOTEBOOKLM_AUTH_URL =
-  "https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fnotebooklm.google.com%2F&flowName=GlifWebSignIn&flowEntry=ServiceLogin";
+export const AISTUDIO_AUTH_URL =
+  "https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Faistudio.google.com%2F&flowName=GlifWebSignIn&flowEntry=ServiceLogin";
 
 export interface Config {
-  // NotebookLM - optional, used for legacy default notebook
-  notebookUrl: string;
+  // AI Studio - optional, used for legacy default notebook
+  chatUrl: string;
 
   // Browser Settings
   headless: boolean;
@@ -82,8 +82,8 @@ export interface Config {
  * Default Configuration (works out of the box!)
  */
 const DEFAULTS: Config = {
-  // NotebookLM
-  notebookUrl: "",
+  // AI Studio
+  chatUrl: "",
 
   // Browser Settings
   headless: true,
@@ -168,7 +168,7 @@ function applyEnvOverrides(config: Config): Config {
   return {
     ...config,
     // Override with env vars if present
-    notebookUrl: process.env.NOTEBOOK_URL || config.notebookUrl,
+    chatUrl: process.env.AISTUDIO_URL || config.chatUrl,
     headless: parseBoolean(process.env.HEADLESS, config.headless),
     browserTimeout: parseInteger(process.env.BROWSER_TIMEOUT, config.browserTimeout),
     maxSessions: parseInteger(process.env.MAX_SESSIONS, config.maxSessions),

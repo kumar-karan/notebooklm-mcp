@@ -1,7 +1,7 @@
 /**
  * Settings Manager
  * 
- * Handles persistent configuration for the NotebookLM MCP Server.
+ * Handles persistent configuration for the AI Studio MCP Server.
  * Manages profiles, disabled tools, and environment variable overrides.
  */
 
@@ -99,8 +99,8 @@ export class SettingsManager {
    * Get effective configuration (merging File settings with Env Vars)
    */
   getEffectiveSettings(): Settings {
-    const envProfile = process.env.NOTEBOOKLM_PROFILE as ProfileName;
-    const envDisabled = process.env.NOTEBOOKLM_DISABLED_TOOLS;
+    const envProfile = process.env.AISTUDIO_PROFILE as ProfileName;
+    const envDisabled = process.env.AISTUDIO_DISABLED_TOOLS;
 
     const effectiveProfile = (envProfile && PROFILES[envProfile]) ? envProfile : this.settings.profile;
     

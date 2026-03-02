@@ -73,16 +73,16 @@ For advanced users who want to set global defaults:
   - `NOTEBOOK_INSTANCE_MAX_COUNT` (default `20`)
 - Library metadata (optional hints)
   - `NOTEBOOK_DESCRIPTION`, `NOTEBOOK_TOPICS`, `NOTEBOOK_CONTENT_TYPES`, `NOTEBOOK_USE_CASES`
-  - `NOTEBOOK_URL` — optional; leave empty and manage notebooks via the library
+  - `AISTUDIO_URL` — optional; leave empty and manage notebooks via the library
 
 ---
 
 ## Storage Paths
 
 The server uses platform-specific paths via [env-paths](https://github.com/sindresorhus/env-paths)
-- **Linux**: `~/.local/share/notebooklm-mcp/`
-- **macOS**: `~/Library/Application Support/notebooklm-mcp/`
-- **Windows**: `%LOCALAPPDATA%\notebooklm-mcp\`
+- **Linux**: `~/.local/share/aistudio-mcp/`
+- **macOS**: `~/Library/Application Support/aistudio-mcp/`
+- **Windows**: `%LOCALAPPDATA%\aistudio-mcp\`
 
 **What's stored:**
 - `chrome_profile/` - Persistent Chrome browser profile with login session

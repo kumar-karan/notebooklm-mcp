@@ -1,6 +1,6 @@
 # Advanced Usage Guide
 
-This guide covers advanced usage patterns, best practices, and detailed examples for the NotebookLM MCP server.
+This guide covers advanced usage patterns, best practices, and detailed examples for the AI Studio MCP server.
 
 > 📘 For installation and quick start, see the main [README](../README.md).
 
@@ -8,15 +8,15 @@ This guide covers advanced usage patterns, best practices, and detailed examples
 
 ### The Iterative Research Pattern
 
-The server is designed to make your agent **ask questions automatically** with NotebookLM. Here's how to leverage this:
+The server is designed to make your agent **ask questions automatically** with AI Studio. Here's how to leverage this:
 
 1. **Start with broad context**
    ```
-   "Before implementing the webhook system, research the complete webhook architecture in NotebookLM, including error handling, retry logic, and security considerations."
+   "Before implementing the webhook system, research the complete webhook architecture in AI Studio, including error handling, retry logic, and security considerations."
    ```
 
 2. **The agent will automatically**:
-   - Ask an initial question to NotebookLM
+   - Ask an initial question to AI Studio
    - Read the reminder at the end of each response
    - Ask follow-up questions to gather more details
    - Continue until it has comprehensive understanding
@@ -33,7 +33,7 @@ The server is designed to make your agent **ask questions automatically** with N
 User: "I need to implement OAuth2 with refresh tokens. Research the complete flow first."
 
 Agent behavior:
-1. Asks NotebookLM: "How does OAuth2 refresh token flow work?"
+1. Asks AI Studio: "How does OAuth2 refresh token flow work?"
 2. Gets answer with reminder to ask more
 3. Asks: "What are the security best practices for storing refresh tokens?"
 4. Asks: "How to handle token expiration and renewal?"
@@ -89,7 +89,7 @@ Free tier provides 50 queries/day per account. Maximize usage:
 The agent can self-repair authentication:
 
 ```
-"NotebookLM says I'm logged out—repair authentication"
+"AI Studio says I'm logged out—repair authentication"
 ```
 
 This triggers: `get_health` → `setup_auth` → `get_health`
@@ -118,7 +118,7 @@ Your agent automatically enables browser visibility for that research session.
 
 Monitor active sessions:
 ```
-"List all active NotebookLM sessions"
+"List all active AI Studio sessions"
 "Close inactive sessions to free resources"
 "Reset the stuck session for notebook X"
 ```
@@ -171,8 +171,8 @@ For manual scripting, capture and reuse session IDs:
 ### Resource URIs
 
 Access library data programmatically:
-- `notebooklm://library` - Full library JSON
-- `notebooklm://library/{id}` - Specific notebook metadata
+- `aistudio://library` - Full library JSON
+- `aistudio://library/{id}` - Specific notebook metadata
 
 ## Best Practices
 
@@ -182,7 +182,7 @@ Access library data programmatically:
 - Use descriptive notebook names for easy switching
 
 ### 2. **Knowledge Base Quality**
-- Upload comprehensive documentation to NotebookLM
+- Upload comprehensive documentation to AI Studio
 - Merge related docs into single notebooks (up to 500k words)
 - Update notebooks when documentation changes
 
@@ -197,15 +197,15 @@ Access library data programmatically:
 - Inactive sessions auto-close after 15 minutes
 
 ### 5. **Security Considerations**
-- Use dedicated Google accounts for NotebookLM
+- Use dedicated Google accounts for AI Studio
 - Never share authentication profiles between projects
 - Backup `library.json` for important notebook collections
 
 ## Troubleshooting Patterns
 
-### When NotebookLM returns incomplete answers
+### When AI Studio returns incomplete answers
 ```
-"The answer seems incomplete. Ask NotebookLM for more specific details about [topic]"
+"The answer seems incomplete. Ask AI Studio for more specific details about [topic]"
 ```
 
 ### When hitting rate limits
@@ -215,7 +215,7 @@ Access library data programmatically:
 
 ### When browser seems stuck
 ```
-"Reset all NotebookLM sessions and try again"
+"Reset all AI Studio sessions and try again"
 ```
 
 ## Example Conversations
@@ -224,10 +224,10 @@ Access library data programmatically:
 ```
 User: "I need to implement a webhook system with retry logic"
 
-You: "Research webhook patterns with retry logic in NotebookLM first"
+You: "Research webhook patterns with retry logic in AI Studio first"
 Agent: [Researches comprehensively, asking 4-5 follow-up questions]
 Agent: "Based on my research, here's the implementation..."
-[Provides detailed code with patterns from NotebookLM]
+[Provides detailed code with patterns from AI Studio]
 ```
 
 ### Architecture Decision

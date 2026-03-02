@@ -1,7 +1,7 @@
 /**
  * Session Manager
  *
- * Manages multiple parallel browser sessions for NotebookLM API
+ * Manages multiple parallel browser sessions for AI Studio API
  *
  * Features:
  * - Session lifecycle management
@@ -63,16 +63,16 @@ export class SessionManager {
    * Get existing session or create a new one
    *
    * @param sessionId Optional session ID to reuse existing session
-   * @param notebookUrl Notebook URL for the session
+   * @param chatUrl Notebook URL for the session
    * @param overrideHeadless Optional override for headless mode (true = show browser)
    */
   async getOrCreateSession(
     sessionId?: string,
-    notebookUrl?: string,
+    chatUrl?: string,
     overrideHeadless?: boolean
   ): Promise<BrowserSession> {
     // Determine target notebook URL
-    const targetUrl = (notebookUrl || CONFIG.notebookUrl || "").trim();
+    const targetUrl = (chatUrl || CONFIG.chatUrl || "").trim();
     if (!targetUrl) {
       throw new Error("Notebook URL is required to create a session");
     }
@@ -102,7 +102,7 @@ export class SessionManager {
     // Return existing session if found
     if (this.sessions.has(sessionId)) {
       const session = this.sessions.get(sessionId)!;
-      if (session.notebookUrl !== targetUrl) {
+      if (session.chatUrl !== targetUrl) {
         log.warning(`♻️  Replacing session ${sessionId} with new notebook URL`);
         await session.close();
         this.sessions.delete(sessionId);
@@ -186,7 +186,7 @@ export class SessionManager {
     let closed = 0;
 
     for (const [sessionId, session] of Array.from(this.sessions.entries())) {
-      if (session.notebookUrl === url) {
+      if (session.chatUrl === url) {
         try {
           await session.close();
         } catch (error) {

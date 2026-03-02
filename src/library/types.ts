@@ -1,78 +1,63 @@
 /**
- * NotebookLM Library Types
- *
- * Defines the structure for managing multiple NotebookLM notebooks
- * in a persistent library that Claude can manage autonomously.
+ * AI Studio Library Types
  */
 
-/**
- * Single notebook entry in the library
- */
-export interface NotebookEntry {
-  // Identification
-  id: string; // Unique identifier (slug format, e.g., "n8n-docs")
-  url: string; // NotebookLM URL
-  name: string; // Display name (e.g., "n8n Workflow Automation")
-
-  // Metadata for Claude's autonomous decision-making
-  description: string; // What knowledge is in this notebook
-  topics: string[]; // Topics covered
-  content_types: string[]; // Types of content (docs, examples, etc.)
-  use_cases: string[]; // When to use this notebook
-
-  // Usage tracking
-  added_at: string; // ISO timestamp when added
-  last_used: string; // ISO timestamp of last use
-  use_count: number; // How many times used
-
-  // Optional tags for organization
-  tags?: string[]; // Custom tags for filtering
+export interface PromptPreset {
+  id: string; // Unique identifier (slug format, e.g., "coding-assistant")
+  name: string; // Display name
+  description: string; // What this preset is used for
+  system_instructions?: string; // System instructions for the model
+  model?: string; // Preferred model (e.g., "gemini-1.5-pro")
+  temperature?: number; // Optional temperature
+  added_at: string;
+  last_used: string;
+  use_count: number;
 }
 
-/**
- * The complete notebook library
- */
+export interface ChatSessionEntry {
+  id: string; // Unique identifier
+  url: string; // AI Studio Chat URL
+  name: string; // Display name
+  preset_id?: string; // Preset used to create this chat
+  added_at: string;
+  last_used: string;
+  use_count: number;
+}
+
 export interface Library {
-  notebooks: NotebookEntry[]; // All notebooks in library
-  active_notebook_id: string | null; // Currently selected notebook
-  last_modified: string; // ISO timestamp of last modification
-  version: string; // Library format version (for future migrations)
+  presets: PromptPreset[];
+  chats: ChatSessionEntry[];
+  active_chat_id: string | null;
+  last_modified: string;
+  version: string;
 }
 
-/**
- * Input for adding a new notebook
- */
-export interface AddNotebookInput {
-  url: string; // Required: NotebookLM URL
-  name: string; // Required: Display name
-  description: string; // Required: What's in it
-  topics: string[]; // Required: Topics covered
-  content_types?: string[]; // Optional: defaults to ["documentation", "examples"]
-  use_cases?: string[]; // Optional: defaults based on description
-  tags?: string[]; // Optional: custom tags
+export interface AddPresetInput {
+  name: string;
+  description: string;
+  system_instructions?: string;
+  model?: string;
+  temperature?: number;
 }
 
-/**
- * Input for updating a notebook
- */
-export interface UpdateNotebookInput {
-  id: string; // Required: which notebook to update
+export interface UpdatePresetInput {
+  id: string;
   name?: string;
   description?: string;
-  topics?: string[];
-  content_types?: string[];
-  use_cases?: string[];
-  tags?: string[];
-  url?: string; // Allow changing URL
+  system_instructions?: string;
+  model?: string;
+  temperature?: number;
 }
 
-/**
- * Statistics about library usage
- */
+export interface AddChatInput {
+  url: string;
+  name: string;
+  preset_id?: string;
+}
+
 export interface LibraryStats {
-  total_notebooks: number;
-  active_notebook: string | null;
-  most_used_notebook: string | null;
-  total_queries: number;
+  total_presets: number;
+  total_chats: number;
+  active_chat: string | null;
   last_modified: string;
 }
